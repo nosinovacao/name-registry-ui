@@ -1,0 +1,28 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptionsSnapshot<ConnectionStrings> connectionStringsSnapshot
+@{
+    this.ViewData["Title"] = "Home Page";
+}
+
+<!--<app asp-prerender-module="ClientApp/dist/main-server"
+     asp-prerender-data="new {
+        RegistryApiUrl = connectionStringsSnapshot.Value.RegistryApiUrl
+     }">Loading...</app>-->
+<app>
+      <div class="sk-wave">
+        <div class="sk-rect sk-rect1"></div>
+        <div class="sk-rect sk-rect2"></div>
+        <div class="sk-rect sk-rect3"></div>
+        <div class="sk-rect sk-rect4"></div>
+        <div class="sk-rect sk-rect5"></div>
+      </div>
+</app>
+
+<script>
+    window.REGISTRY_API_URL = "@connectionStringsSnapshot.Value.RegistryApiUrl";
+</script>
+
+<script src="~/dist/vendor.js" asp-append-version="true"></script>
+@section scripts {
+    <script src="~/dist/main-client.js" asp-append-version="true"></script>
+}

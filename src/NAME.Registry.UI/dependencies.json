@@ -1,0 +1,39 @@
+﻿{
+  "$schema": "http://herms.cloudapp.net/schemas/name.dependencies.v1.jschema",
+  "infrastructure_dependencies": [
+    {
+      "oneOf": [
+        {
+          "type": "OperatingSystem",
+          "os_name": "debian",
+          "max_version": "*",
+          "min_version": "8"
+        },
+        {
+          "type": "OperatingSystem",
+          "os_name": "rhel",
+          "max_version": "*",
+          "min_version": "7.1"
+        },
+        {
+          "type": "OperatingSystem",
+          "os_name": "windows",
+          "max_version": "*",
+          "min_version": "WindowsServer2012"
+        }
+      ]
+    }
+  ],
+  "service_dependencies": [
+    {
+      "name": "NAME.Registry.API",
+      "connection_string": {
+        "locator": "JSONPath",
+        "file": "appsettings.json",
+        "expression": "$.ConnectionStrings.name-registry-api"
+      },
+      "min_version": "1.0",
+      "max_version": "*"
+    }
+  ]
+}

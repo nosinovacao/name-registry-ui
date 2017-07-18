@@ -1,0 +1,78 @@
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col-md-12 page-header">
+            <span class="h1">Registered Services</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group label-floating">
+                <label class="control-label" for="focusedInput1">Application Name</label>
+                <input [(ngModel)]="servicesFilter.appName" class="form-control" id="focusedInput1" type="text" (keyup)="filterChanged()">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group label-floating">
+                <label class="control-label" for="focusedInput1">Machine Name</label>
+                <input [(ngModel)]="servicesFilter.hostname" class="form-control" id="focusedInput1" type="text" (keyup)="filterChanged()">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group label-floating">
+                <label class="control-label" for="focusedInput1">Version</label>
+                <input [(ngModel)]="servicesFilter.appVersion" class="form-control" id="focusedInput1" type="text" (keyup)="filterChanged()">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group label-floating">
+                <label class="control-label" for="select111">Last Ping</label>
+                <select id="select111" [(ngModel)]="servicesFilter.lastPingMinimumMinutesAgo" class="form-control" (change)="filterChanged()">
+                    <option selected value></option>
+                    <option [value]="10">10 Minutes Ago</option>
+                    <option [value]="60">1 Hour Ago</option>
+                    <option [value]="720">12 Hours Ago</option>
+                    <option [value]="10080">Last Week</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <loadingbar [loading]="isLoading | async"> </loadingbar>
+            <div *ngIf="services">
+                <div class="table-responsive-vertical shadow-z-1">
+                    <table class='table table-hover table-mc-light-blue'>
+                        <thead>
+                            <tr>
+                                <th>Aplication</th>
+                                <th>Version</th>
+                                <th>Machine</th>
+                                <th>Endpoint</th>
+                                <th>Last Ping</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let service of services | async">
+                                <td data-title="Application">{{ service.AppName }}</td>
+                                <td data-title="Version">{{ service.AppVersion }}</td>
+                                <td data-title="Machine">{{ service.Hostname }}</td>
+                                <td data-title="Endpoint"><a [href]="service | serviceEndpoint" target="_blank">{{ service.NAMEEndpoint }}</a></td>
+                                <td data-title="Last Ping">{{ service.CurrentSession.LastPing | amCalendar }}</td>
+                                <td data-title="Actions">
+                                    <span class="text-nowrap">
+                                        <a data-toggle="tooltip" title="Details" routerLink="/service/{{service.Id}}"><i class="material-icons">info_outline</i></a>
+                                        <a href="javascript:void(0)" title="Last Snapshot" *ngIf="service.CurrentSession.LastManifestSnapshot" 
+                                            (click)="snapshotModal.open(service.CurrentSession.LastManifestSnapshot)"><i class="material-icons">code</i></a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<modal-single-snapshot-details #snapshotModal></modal-single-snapshot-details>

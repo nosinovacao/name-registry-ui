@@ -1,0 +1,6 @@
+pre span { white-space: normal;}
+span.string { color: green; }
+span.number { color: darkorange; }
+span.boolean { color: blue; }
+span.null { color: magenta; }
+span.key { color: red; }

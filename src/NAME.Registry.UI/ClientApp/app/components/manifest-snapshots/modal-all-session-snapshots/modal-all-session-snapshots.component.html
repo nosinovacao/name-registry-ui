@@ -1,0 +1,17 @@
+<modal #modal>
+    <modal-header>
+        <h4 *ngIf="session" class="modal-title">Snapshots from the Session bootstrapped {{ session.Bootstrapped | amCalendar }}</h4>
+    </modal-header>
+    <modal-body>
+        <div class="form-group label-floating">
+            <label class="control-label" for="select111">Manifest Snapshot</label>
+            <select *ngIf="manifestSnapshots" [(ngModel)]="selectedManifest" class="form-control">
+                <option *ngFor="let snapshot of manifestSnapshots | async" [ngValue]="snapshot">{{snapshot.DateAndTime | amCalendar}}</option>
+            </select>
+        </div>
+        <pre *ngIf="selectedManifest" [innerHTML]="selectedManifest.PrettyHtmlManifest"></pre>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-primary" (click)="modal.close()">Close</button>
+    </modal-footer>
+</modal>

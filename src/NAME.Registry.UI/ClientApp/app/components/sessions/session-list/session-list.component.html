@@ -1,0 +1,35 @@
+<div *ngIf="sessions" class="table-responsive-vertical shadow-z-1">
+    <table class='table table-hover table-mc-light-blue'>
+        <thead>
+            <tr>
+                <th>Active</th>
+                <th>Bootstrapped</th>
+                <th>Last Ping</th>
+                <th>Last Snapshot</th>
+                <th>Snapshots</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let session of sessions | async">
+                <td *ngIf="session.Invalidated" data-title="Active" title="Invalidated {{session.Invalidated | amCalendar}}">
+                    <i class="material-icons text-danger">clear</i>
+                </td>
+                <td *ngIf="!session.Invalidated" data-title="Active" title="Active">
+                    <i class="material-icons text-success">check</i>
+                </td>
+                <td data-title="Bootstrapped">{{ session.Bootstrapped | amCalendar }}</td>
+                <td data-title="Last Ping">{{ (session.LastPing | amCalendar) || "Undefined" }}</td>
+                <td data-title="Last Snapshot">{{session.LastManifestSnapshot ? (session.LastManifestSnapshot.DateAndTime | amCalendar) : "Undefined"}}</td>
+                <td data-title="Snapshots">{{ session.ManifestSnapshotCount }}</td>
+                <td data-title="Actions">
+                    <div class="text-nowrap">
+                        <a href="javascript:void(0)" title="Snapshots" *ngIf="session" (click)="snapshotModal.open(session)"><i class="material-icons">code</i></a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<modal-all-session-snapshots #snapshotModal></modal-all-session-snapshots>

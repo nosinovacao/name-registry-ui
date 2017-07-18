@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="row ">
+        <div *ngIf="service" class="panel panel-default page-header ">
+            <div class="panel-heading">
+                <h3>{{service.AppName}} <small>{{service.AppVersion}}</small></h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label>Machine:</label>
+                        <p>{{service.Hostname}}</p>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>NAME Endpoint:</label>
+                        <p><a [href]="service | serviceEndpoint" target="_blank">{{ service.NAMEEndpoint }}</a></p>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Port:</label>
+                        <p>{{service.NAMEPort || 'undefined'}}</p>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Active Session Pinged:</label>
+                        <p>{{service.CurrentSession.LastPing ? (service.CurrentSession.LastPing | amCalendar) : "Undefined"}}</p>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Active Session Bootstrapped:</label>
+                        <p>{{service.CurrentSession.Bootstrapped | amCalendar}}</p>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Manifest Snapshotted:</label>
+                        <p>{{service.CurrentSession.LastManifestSnapshot ? (service.CurrentSession.LastManifestSnapshot.DateAndTime | amCalendar) : "Undefined"}}</p>
+                    </div>
+                </div>
+                <div class="container-fluid row">
+                    <div class="col">
+                        <label class="">Sessions:</label>
+                        <sessionlist *ngIf="service" [serviceId]="serviceId"></sessionlist>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
