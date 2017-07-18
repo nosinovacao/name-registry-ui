@@ -1,0 +1,23 @@
+version: '{branch}-{build}'
+branches:
+  only:
+    - master
+    - dev
+    - ci-support
+# Temporary workaround for AppVeyor "connectivity issues to nuget.org"
+# More info: https://appveyor.statuspage.io/incidents/m2vdvw39kdk8
+hosts:
+  api.nuget.org: 93.184.221.200
+environment:
+  # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  # Disable sending usage data to Microsoft
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+# Use init to set the version using the Directory.Build.props file, branch and build number
+on_finish:
+- ps: |
+    $versionPrefix = ([xml](Get-Content .\src\Directory.Build.props)).Project.PropertyGroup.VersionPrefix
+    Update-AppveyorBuild -Version "$versionPrefix-$env:APPVEYOR_REPO_BRANCH-$env:APPVEYOR_BUILD_NUMBER"
+build_script:
+- ps: .\build.ps1 -t AppVeyor
+test: off
