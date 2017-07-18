@@ -102,7 +102,7 @@ Task("Docker-Build-AND-Push")
 
 
 Task("Build-AND-Test")
-    .IsDependentOn("Build")
+    .IsDependentOn("Build");
 
 Task("AppVeyor")
     .IsDependentOn("Build");
