@@ -58,7 +58,7 @@
                                 <td data-title="Version">{{ service.AppVersion }}</td>
                                 <td data-title="Machine">{{ service.Hostname }}</td>
                                 <td data-title="Endpoint"><a [href]="service | serviceEndpoint" target="_blank">{{ service.NAMEEndpoint }}</a></td>
-                                <td data-title="Last Ping">{{ service.CurrentSession.LastPing | amCalendar }}</td>
+                                <td data-title="Last Ping">{{ service.CurrentSession.LastPing | amDateFormat: 'lll' }}</td>
                                 <td data-title="Actions">
                                     <span class="text-nowrap">
                                         <a data-toggle="tooltip" title="Details" routerLink="/service/{{service.Id}}"><i class="material-icons">info_outline</i></a>

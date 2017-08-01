@@ -12,15 +12,15 @@
         </thead>
         <tbody>
             <tr *ngFor="let session of sessions | async">
-                <td *ngIf="session.Invalidated" data-title="Active" title="Invalidated {{session.Invalidated | amCalendar}}">
+                <td *ngIf="session.Invalidated" data-title="Active" title="Invalidated {{session.Invalidated | amDateFormat: 'lll' }}">
                     <i class="material-icons text-danger">clear</i>
                 </td>
                 <td *ngIf="!session.Invalidated" data-title="Active" title="Active">
                     <i class="material-icons text-success">check</i>
                 </td>
-                <td data-title="Bootstrapped">{{ session.Bootstrapped | amCalendar }}</td>
-                <td data-title="Last Ping">{{ (session.LastPing | amCalendar) || "Undefined" }}</td>
-                <td data-title="Last Snapshot">{{session.LastManifestSnapshot ? (session.LastManifestSnapshot.DateAndTime | amCalendar) : "Undefined"}}</td>
+                <td data-title="Bootstrapped">{{ session.Bootstrapped | amDateFormat: 'lll' }}</td>
+                <td data-title="Last Ping">{{ (session.LastPing | amDateFormat: 'lll' ) || "Undefined" }}</td>
+                <td data-title="Last Snapshot">{{session.LastManifestSnapshot ? (session.LastManifestSnapshot.DateAndTime | amDateFormat: 'lll' ) : "Undefined"}}</td>
                 <td data-title="Snapshots">{{ session.ManifestSnapshotCount }}</td>
                 <td data-title="Actions">
                     <div class="text-nowrap">

@@ -1,6 +1,6 @@
 <modal #modal>
     <modal-header>
-        <h4 class="modal-title">Manifest Snapshot from {{ dateAndTime | amCalendar:referenceTime:{sameElse: 'L [at] LT'} }}</h4>
+        <h4 class="modal-title">Manifest Snapshot from {{ dateAndTime | amDateFormat: 'lll' }}</h4>
     </modal-header>
     <modal-body>
         <pre [innerHTML]="prettyManifestHtml"></pre>

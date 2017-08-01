@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as moment from 'moment';
 declare var $: any;
 
 @Component({
@@ -12,5 +13,7 @@ export class AppComponent {
         if($.material){
             $.material.init();
         }
+        var locale = window.navigator.language;
+        moment.locale("en-gb");
     }
 }

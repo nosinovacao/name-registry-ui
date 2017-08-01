@@ -20,15 +20,15 @@
                     </div>
                     <div class="col-sm-3">
                         <label>Active Session Pinged:</label>
-                        <p>{{service.CurrentSession.LastPing ? (service.CurrentSession.LastPing | amCalendar) : "Undefined"}}</p>
+                        <p>{{service.CurrentSession.LastPing ? (service.CurrentSession.LastPing | amDateFormat: 'lll' ) : "Undefined"}}</p>
                     </div>
                     <div class="col-sm-3">
                         <label>Active Session Bootstrapped:</label>
-                        <p>{{service.CurrentSession.Bootstrapped | amCalendar}}</p>
+                        <p>{{service.CurrentSession.Bootstrapped | amDateFormat: 'lll' }}</p>
                     </div>
                     <div class="col-sm-3">
                         <label>Manifest Snapshotted:</label>
-                        <p>{{service.CurrentSession.LastManifestSnapshot ? (service.CurrentSession.LastManifestSnapshot.DateAndTime | amCalendar) : "Undefined"}}</p>
+                        <p>{{service.CurrentSession.LastManifestSnapshot ? (service.CurrentSession.LastManifestSnapshot.DateAndTime | amDateFormat: 'lll' ) : "Undefined"}}</p>
                     </div>
                 </div>
                 <div class="container-fluid row">
