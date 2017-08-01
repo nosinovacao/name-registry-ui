@@ -110,6 +110,9 @@ Task("AppVeyor")
 Task("TravisCI")
     .IsDependentOn("Build")
     .IsDependentOn("Publish-Website");
+    
+Task("Full-Build")
+    .IsDependentOn("Build-AND-Test");
 
 Task("Default")
     .IsDependentOn("Build-AND-Test");
